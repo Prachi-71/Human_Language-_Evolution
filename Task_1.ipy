@@ -1,0 +1,24 @@
+from conllu import parse_incr
+
+def count_verbs_in_sentence(file_path):
+    verb_count = []
+
+    with open(file_path, "r", encoding = "utf-8") as f:
+        for tokenlist in parse_incr(f):
+
+            count = 0
+            for token in tokenlist:
+                if token['upos'] == "VERB":
+                    count +=1
+            verb_count.append(count)
+    return verb_count
+
+
+english_path = "C:/Users/Hp/OneDrive/Desktop/UD_English-EWT-master/UD_English-EWT-master/en_ewt-ud-test.conllu"
+hindi_path = "C:/Users/Hp/OneDrive/Desktop/UD_Hindi-HDTB-master/UD_Hindi-HDTB-master/hi_hdtb-ud-test.conllu"
+
+english_verbs = count_verbs_in_sentence(english_path)
+hindi_verbs = count_verbs_in_sentence(hindi_path)
+
+print("English verb counts:", english_verbs[:])
+print("Hindi verb counts:", hindi_verbs[:])
